@@ -18,9 +18,6 @@ class PhysicsCardDragDemo extends StatelessWidget {
     );
   }
 }
-
-/// A draggable card that moves back to [Alignment.center] when it's
-/// released.
 class DraggableCard extends StatefulWidget {
   final Widget child;
   DraggableCard({required this.child});
@@ -33,16 +30,10 @@ class _DraggableCardState extends State<DraggableCard>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
-  /// The alignment of the card as it is dragged or being animated.
-  ///
-  /// While the card is being dragged, this value is set to the values computed
-  /// in the GestureDetector onPanUpdate callback. If the animation is running,
-  /// this value is set to the value of the [_animation].
   Alignment _dragAlignment = Alignment.center;
 
   late Animation<Alignment> _animation;
 
-  /// Calculates and runs a [SpringSimulation].
   void _runAnimation(Offset pixelsPerSecond, Size size) {
     _animation = _controller.drive(
       AlignmentTween(
@@ -50,8 +41,7 @@ class _DraggableCardState extends State<DraggableCard>
         end: Alignment.center,
       ),
     );
-    // Calculate the velocity relative to the unit interval, [0,1],
-    // used by the animation controller.
+
     final unitsPerSecondX = pixelsPerSecond.dx / size.width;
     final unitsPerSecondY = pixelsPerSecond.dy / size.height;
     final unitsPerSecond = Offset(unitsPerSecondX, unitsPerSecondY);
@@ -112,4 +102,5 @@ class _DraggableCardState extends State<DraggableCard>
       ),
     );
   }
+    // used by the animation controller.
 }
